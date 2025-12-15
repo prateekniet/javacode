@@ -1,5 +1,4 @@
 This is Java repo.
  
-sa
-sad
+so
 this is new commit
