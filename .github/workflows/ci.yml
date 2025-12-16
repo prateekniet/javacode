@@ -1,20 +1,12 @@
-name: CI Example
+name: Use Secret Example
 
-on:
-  push:
-    branches:
-      - main
-
-env:
-  DEPLOY_ENV: production 
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Print environment variable
-        run: echo "Deploying to $DEPLOY_ENV"
+      - name: Use secret
+        env:
+          API_KEY: ${{ secrets.SECRET1 }}
+        run: echo "API KEY: $API_KEY"
