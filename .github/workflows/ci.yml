@@ -1,6 +1,6 @@
 name: Use Secret Example
 
-on: push
+on: push 
 
 jobs:
   build:
