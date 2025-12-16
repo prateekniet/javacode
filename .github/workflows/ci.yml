@@ -1,55 +1,48 @@
-name: Echo Secret and Variable
+name: Conditional Workflow Demo
 
 on:
   push:
     branches:
       - main
+      - feature/**
   pull_request:
     branches:
       - main
-
-env:
-  newVar: "This is a global variable"
+  workflow_dispatch:
 
 jobs:
-  job1:
-    name: First Job - Echo Context and Secret
+  analyze-event:
+    name: Analyze Event and Context
     runs-on: ubuntu-latest
 
-    outputs:
-      outputFromJob1: ${{ steps.job1_output.outputs.outputFromJob1 }}
-
     steps:
-      - name: Print Event Context
+      - name: Print Event Info
         run: |
-          echo "GitHub Event Name: ${{ github.event_name }}"
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Event Action: ${{ github.event.action }}"
           echo "Repository: ${{ github.repository }}"
-          echo "Actor: ${{ github.actor }}"
-          echo "Branch: ${{ github.ref_name }}"
+          echo "Branch Name: ${{ github.ref_name }}"
+          echo "Triggered By: ${{ github.actor }}"
 
-      - name: Access Secret and Variable
-        env:
-          SECRET1: ${{ secrets.SECRET1 }}
+      - name: Push to Main Branch Message
+        if: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+        run: echo "This is a push to the main branch!"
+
+      - name: List Files Changed in Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
         run: |
-          echo "Value of SECRET1: $SECRET1"
-          echo "Value of newVar: $newVar"
+          echo "Number of files changed in PR:"
+          echo "${{ github.event.pull_request.changed_files }}"
 
-      - name: Set Output for Second Job
-        id: job1_output
-        run: echo "outputFromJob1=Hello from Job 1!" >> $GITHUB_OUTPUT
-
-  job2:
-    name: Second Job - Use Output from Job 1
-    needs: job1
+  run-specific-task:
+    name: Run Task on Specific Conditions
     runs-on: ubuntu-latest
+    needs: analyze-event
+    if: ${{ github.event_name == 'workflow_dispatch' || startsWith(github.ref_name, 'feature/') }}
 
     steps:
-      - name: Use Output from Job 1
+      - name: Run Conditional Task
         run: |
-          echo "Message from Job 1: ${{ needs.job1.outputs.outputFromJob1 }}"
-
-      - name: Print GitHub Context
-        run: |
-          echo "Event Trigger: ${{ github.event_name }}"
-          echo "Triggered by: ${{ github.actor }}"
-
+          echo "Running conditional task..."
+          echo "Triggered by: ${{ github.event_name }}"
+          echo "Branch: ${{ github.ref_name }}"
