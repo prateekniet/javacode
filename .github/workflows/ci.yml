@@ -1,0 +1,20 @@
+name: CI Example
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DEPLOY_ENV: production
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print workflow env
+        run: echo "Deploy Environment is $DEPLOY_ENV"
