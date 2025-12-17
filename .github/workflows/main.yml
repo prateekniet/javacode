@@ -8,4 +8,4 @@ jobs:
     environment: Prod
     steps:
       - name: Print variable
-        run: echo "Deploying to ${{DEPLOY_NAME}}"
+        run: echo "Deploying to $DEPLOY_NAME"
