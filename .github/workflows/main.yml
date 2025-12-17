@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: Dev
+    environment: Prod
     steps:
       - name: Print variable
-        run: echo "Deploying to $CLASS_NAME"
+        run: echo "Deploying to $DEPLOY_NAME"
