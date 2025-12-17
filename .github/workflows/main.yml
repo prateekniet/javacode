@@ -2,17 +2,11 @@ name: Java CI with Maven
 on:
  push:
   branches: [main]
-
 jobs:
-  builds:
-    runs-on: self-hosted
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_ENV: ${{ vars.DEPLOY_ENV }}
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-    - name: Build Java package
-      run: mvn clean install -f Javarepo1/pom.xml
-    - name: Upload JAR Artifact
-      uses: actions/upload-artifact@v4
-      with:
-       name: my-java-artifact
-       path: Javarepo1/target/*.jar
+      - name: Print variable
+        run: echo "Deploying to $DEPLOY_ENV"
