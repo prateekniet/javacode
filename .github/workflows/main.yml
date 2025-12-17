@@ -8,4 +8,4 @@ jobs:
     environment: Dev
     steps:
       - name: Print variable
-        run: echo "Deploying to $DEPLOY_ENV"
+        run: echo "Deploying to $CLASS_NAME"
