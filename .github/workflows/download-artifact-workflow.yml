@@ -1,0 +1,14 @@
+name: 
+on:
+ push: 
+  branches: [main]
+jobs:
+  deploy:
+   steps:
+   - name: Download a Build Artifact
+     uses: actions/download-artifact@v3.1.0
+     with:
+    # Artifact name
+      name: cohort-java
+    # Destination path
+      path: Javarepo1/target/*.jar
