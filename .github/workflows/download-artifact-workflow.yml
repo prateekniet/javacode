@@ -10,6 +10,6 @@ jobs:
      uses: actions/download-artifact@v8
      with:
     # Artifact name
-      name: cohort-java
+      name: my-java-artifact
     # Destination path
       path: Javarepo1/target/*.jar
