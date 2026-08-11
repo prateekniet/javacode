@@ -4,6 +4,7 @@ on:
   branches: [main]
 jobs:
   deploy:
+   runs-on: ubuntu-latest
    steps:
    - name: Download a Build Artifact
      uses: actions/download-artifact@v3.1.0
