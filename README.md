@@ -1,5 +1,3 @@
 This is Java repo.
- 
-so
-this is new commit
+Executing a new change
   
