@@ -8,10 +8,15 @@ jobs:
     steps:
       - run: echo "Building"
   security:
+   needs: 
+   - build
     runs-on: ubuntu-latest
     steps:
       - run: echo "Security Scan"
   deploy:
+    needs:
+    - build
+    - security
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying"
