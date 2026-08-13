@@ -8,8 +8,8 @@ jobs:
     steps:
       - run: echo "Building"
   security:
-   needs: 
-   - build
+    needs: 
+    - build
     runs-on: ubuntu-latest
     steps:
       - run: echo "Security Scan"
