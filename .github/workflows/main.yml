@@ -5,7 +5,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: QA
     steps:
-      - name: Print variable
-        run: echo ${{ vars.DEPLOY_NAME }}
+      - run: echo "Building"
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Security Scan"
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying"
