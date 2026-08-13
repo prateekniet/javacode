@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: Prod
+    environment: QA
     steps:
       - name: Print variable
         run: echo ${{ vars.DEPLOY_NAME }}
